@@ -53,7 +53,7 @@ def job(index):
                     text = client.chat.completions.create(
                         model=AI_TEXT_MODEL,
                         messages=[
-                            { "role": "system", "content": f"Ты - блогер с 1000000 подписчиков и целевой аудиторией {task.age} лет" },
+                            { "role": "system", "content": f"Ты - блогер с 1000000 подписчиков и целевой аудиторией {task.age} лет, используешь в разговоре сленг и смайлики" },
                             { "role": "user", "content": task.prompt },
                         ]
                     ).choices[0].message.content
