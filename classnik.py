@@ -60,7 +60,7 @@ def job(index):
                     open(text_filename, 'wt', encoding="UTF-8").write(text)
                 
                 if task.image_prompt is not None:
-                    if not os.path.exists(image_propmpt_filename):
+                    if not os.path.exists(image_propmpt_filename) and not os.path.exists(input_image_filename):
                         image_prompt = client.chat.completions.create(
                             model=AI_TEXT_MODEL,
                             messages=[
