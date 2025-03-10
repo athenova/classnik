@@ -88,10 +88,13 @@ def job(index):
                         png_image.save(output_image_filename)
                 
                 bot = telebot.TeleBot(BOT_TOKEN)
-                if os.path.exists(output_image_filename):
-                    bot.send_photo(chat_id=CHAT_ID, photo=open(output_image_filename, 'rb'), disable_notification=True)
-                if os.path.exists(text_filename):
-                    bot.send_message(chat_id=CHAT_ID, text=open(text_filename, 'rt', encoding='UTF-8').read(), parse_mode="Markdown")
+                if os.path.exists(output_image_filename) and os.path.exists(text_filename):
+                    bot.send_photo(chat_id=CHAT_ID, photo=open(output_image_filename, 'rb'), caption=open(text_filename, 'rt', encoding='UTF-8').read())
+                else:
+                    if os.path.exists(output_image_filename):
+                        bot.send_photo(chat_id=CHAT_ID, photo=open(output_image_filename, 'rb'), disable_notification=True)
+                    if os.path.exists(text_filename):
+                        bot.send_message(chat_id=CHAT_ID, text=open(text_filename, 'rt', encoding='UTF-8').read(), parse_mode="Markdown")
 
 schedule.every().day.at("07:50",'Europe/Moscow').do(job, index = 1)
 schedule.every().day.at("08:50",'Europe/Moscow').do(job, index = 2)
